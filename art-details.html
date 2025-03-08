@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Art Society</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="art-detail-container">
+        <div class="art-image">
+            <img id="artwork-img" src="" alt="Artwork">
+        </div>
+        <div class="art-info">
+            <h2 id="art-title">Artwork Title</h2>
+            <p><strong>Artist:</strong> <span id="art-artist"></span></p>
+            <p><strong>Year:</strong> <span id="art-year"></span></p>
+            <p><strong>Medium:</strong> <span id="art-medium"></span></p>
+            <p><strong>Description:</strong> <span id="art-description"></span></p>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section class="comments">
+        <h3>Comments</h3>
+        <div id="comment-list"></div>
+        <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+        <button onclick="addComment()">Post Comment</button>
+    </section>
+
+    <script>
+        // Sample art data (You can replace this with dynamic data)
+        const artData = {
+            1: { img: "art1.jpg", title: "Sunset Bliss", artist: "John Doe", year: "2023", medium: "Oil on Canvas", description: "A beautiful sunset over the ocean." },
+            2: { img: "art2.jpg", title: "Abstract Thoughts", artist: "Emma Smith", year: "2021", medium: "Digital Art", description: "An abstract representation of deep thoughts." },
+            3: { img: "art3.jpg", title: "Golden Fields", artist: "Liam Brown", year: "2020", medium: "Watercolor", description: "Golden wheat fields under a blue sky." },
+            4: { img: "art4.jpg", title: "Ocean Dream", artist: "Liam Brown", year: "2023", medium: "Watercolor", description: "Golden wheat fields under a blue sky." },
+            5: { img: "art5.jpg", title: "Mystic Night", artist: "Liam Brown", year: "2024", medium: "Pastelcolor", description: "Golden wheat fields under a blue sky." },
+            6: { img: "art6.jpg", title: "Serenity", artist: "Liam Brown", year: "2025", medium: "Bluecolor", description: "Golden wheat fields under a blue sky." },
+        };
+
+        // Get art ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const artId = urlParams.get("art");
+
+        // Update the page content based on the art ID
+        if (artData[artId]) {
+            document.getElementById("artwork-img").src = artData[artId].img;
+            document.getElementById("art-title").textContent = artData[artId].title;
+            document.getElementById("art-artist").textContent = artData[artId].artist;
+            document.getElementById("art-year").textContent = artData[artId].year;
+            document.getElementById("art-medium").textContent = artData[artId].medium;
+            document.getElementById("art-description").textContent = artData[artId].description;
+        }
+
+        // Comments system
+        function addComment() {
+            const commentInput = document.getElementById("comment-input");
+            const commentText = commentInput.value.trim();
+            if (commentText !== "") {
+                const commentList = document.getElementById("comment-list");
+                const comment = document.createElement("p");
+                comment.textContent = commentText;
+                commentList.appendChild(comment);
+                commentInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
